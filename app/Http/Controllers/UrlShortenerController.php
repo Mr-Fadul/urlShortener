@@ -39,7 +39,7 @@ class UrlShortenerController extends Controller
     {       
         $urlShort->url = $request->url;
         $urlShort->shortUrl = $request->urlName?? $urlShort->encurtarUrl();
-        $urlShort->lifeTime = $request->lifeTime?? now()->addDays(7);
+        $urlShort->lifeTime = ($request->lifeTime)? now()->addDays($request->lifeTime) : now()->addDays(7);
         try {
            $urlShort->save();
         }catch (\Exception $e) {
